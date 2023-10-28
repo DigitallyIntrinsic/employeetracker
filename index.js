@@ -45,9 +45,30 @@ function options() {
       });
   }
 
+//   View all departments
   const viewAllDepartments = () => {
     var departments = Department.findAll({ raw: true }).then((data) => {
       console.table(data);
+      options();
+    });
+  };
+
+//   View all roles
+const viewAllRoles = () => {
+    var roles = Role.findAll({
+      raw: true,
+      include: [{ model: Department }],
+    }).then((data) => {
+      console.table(
+        data.map((role) => {
+          return {
+            id: role.id,
+            title: role.title,
+            salary: role.salary,
+            department: role["Department.name"],
+          };
+        })
+      );
       options();
     });
   };
