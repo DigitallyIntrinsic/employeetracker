@@ -130,4 +130,31 @@ const addRole = async () => {
     departments = departments.map((department) =>
       department.get({ plain: true })
     )
-    
+     // Prompts user for new role name, salary, and corresponding department
+  inquirer
+  .prompt([
+    {
+      type: "input",
+      message: "What is the name of the role?",
+      name: "title",
+    },
+    {
+      type: "input",
+      message: "What would you like the salary to be?",
+      name: "salary",
+    },
+    {
+      type: "list",
+      message: "What department would you like to add this new role to?",
+      name: "department_id",
+      choices: departments,
+    },
+  ])
+  // Takes in user inputs and adds answers to database
+  .then((answer) => {
+    Role.create(answer).then((data) => {
+      options();
+    });
+  });
+}; 
+
