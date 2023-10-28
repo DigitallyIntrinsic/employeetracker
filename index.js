@@ -175,3 +175,12 @@ const addEmployee = async () => {
         ["last_name", "lastName"],
       ],
     });
+    managers = managers.map((manager) => {
+        manager.get({ plain: true });
+        const managerInfo = manager.get();
+        return {
+          name: `${managerInfo.name} ${managerInfo.lastName}`,
+          value: managerInfo.value,
+        };
+      });
+      managers.push({ type: "Null Manager", value: null });
