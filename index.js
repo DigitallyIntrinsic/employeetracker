@@ -118,3 +118,16 @@ const addDepartment = () => {
         });
       });
   };
+
+  // Add role
+const addRole = async () => {
+    let departments = await Department.findAll({
+      attributes: [
+        ["id", "value"],
+        ["name", "name"],
+      ],
+    });
+    departments = departments.map((department) =>
+      department.get({ plain: true })
+    )
+    
