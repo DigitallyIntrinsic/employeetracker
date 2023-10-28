@@ -72,4 +72,33 @@ const viewAllRoles = () => {
       options();
     });
   };
+
+  // View all employees
+const viewAllEmployees = () => {
+    var employees = Employee.findAll({
+      raw: true,
+      include: [{ model: Role, include: [{ model: Department }] }],
+    }).then((data) => {
+      const employeeLookup = {};
+      for (var i = 0; i < data.length; i++) {
+        const employee = data[i];
+        employeeLookup[employee.id] =
+          employee.first_name + " " + employee.last_name;
+      }
+      console.table(
+        data.map((employee) => {
+          return {
+            id: employee.id,
+            first_name: employee.first_name,
+            last_name: employee.last_name,
+            title: employee["Role.title"],
+            department: employee["Role.Department.name"],
+            salary: employee["Role.salary"],
+            manager: employeeLookup[employee.manager_id],
+          };
+        })
+      );
+      options();
+    });
+  };
   
