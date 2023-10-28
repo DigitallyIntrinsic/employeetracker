@@ -233,3 +233,37 @@ const updateEmployeeRole = async () => {
         value: employeeInfo.value,
       };
     });
+    let roles = await Role.findAll({
+        attributes: [
+          ["id", "value"],
+          ["title", "name"],
+        ],
+      });
+      roles = roles.map((role) => role.get({ plain: true }));
+    // Prompts user to select employee whose role will be updated, and new role of said employee
+      inquirer
+        .prompt([
+          {
+            type: "list",
+            message: "Who is the employee whose role you would like to update?",
+            name: "id",
+            choices: employees,
+          },
+          {
+            type: "list",
+            message:
+              "What is the name of the updated role would you like to assign to this employee?",
+            name: "role_id",
+            choices: roles,
+          },
+        ])
+        .then((answer) => {
+          Employee.update(answer, {
+            where: {
+              id: answer.id,
+            },
+          }).then((data) => {
+            options();
+          });
+        });
+    };
