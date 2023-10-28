@@ -101,4 +101,20 @@ const viewAllEmployees = () => {
       options();
     });
   };
-  
+
+  // Add department
+const addDepartment = () => {
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          message: "What would you like to name the department?",
+          name: "addDepartment",
+        },
+      ])
+      .then((answer) => {
+        Department.create({ name: answer.addDepartment }).then((data) => {
+          options();
+        });
+      });
+  };
