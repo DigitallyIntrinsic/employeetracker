@@ -184,3 +184,34 @@ const addEmployee = async () => {
         };
       });
       managers.push({ type: "Null Manager", value: null });
+      inquirer
+      .prompt([
+        {
+          type: "input",
+          message: "What is the first name of the new employee?",
+          name: "first_name",
+        },
+        {
+          type: "input",
+          message: "What is the last name of the new employee?",
+          name: "last_name",
+        },
+        {
+          type: "list",
+          message: "What is the role of the new employee?",
+          name: "role_id",
+          choices: roles,
+        },
+        {
+          type: "list",
+          message: "What manager would you like to assign to the new employee?",
+          name: "manager_id",
+          choices: managers,
+        },
+      ])
+      .then((answer) => {
+        Employee.create(answer).then((data) => {
+          options();
+        });
+      });
+  };
