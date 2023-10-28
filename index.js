@@ -158,3 +158,20 @@ const addRole = async () => {
   });
 }; 
 
+// Add employee
+const addEmployee = async () => {
+    let roles = await Role.findAll({
+      attributes: [
+        ["id", "value"],
+        ["title", "name"],
+      ],
+    });
+    roles = roles.map((role) => role.get({ plain: true }));
+  
+    let managers = await Employee.findAll({
+      attributes: [
+        ["id", "value"],
+        ["first_name", "name"],
+        ["last_name", "lastName"],
+      ],
+    });
