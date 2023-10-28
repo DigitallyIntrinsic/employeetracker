@@ -215,3 +215,21 @@ const addEmployee = async () => {
         });
       });
   };
+
+  // Update employee role
+const updateEmployeeRole = async () => {
+    let employees = await Employee.findAll({
+      attributes: [
+        ["id", "value"],
+        ["first_name", "name"],
+        ["last_name", "lastName"],
+      ],
+    });
+    employees = employees.map((employee) => {
+      employee.get({ plain: true });
+      const employeeInfo = employee.get();
+      return {
+        name: `${employeeInfo.name} ${employeeInfo.lastName}`,
+        value: employeeInfo.value,
+      };
+    });
