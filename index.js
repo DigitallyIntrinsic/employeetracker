@@ -44,3 +44,11 @@ function options() {
         }
       });
   }
+
+  const viewAllDepartments = () => {
+    var departments = Department.findAll({ raw: true }).then((data) => {
+      console.table(data);
+      options();
+    });
+  };
+  
