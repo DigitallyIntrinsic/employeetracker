@@ -23,9 +23,9 @@ To use this application, you must utilize Node.js, SQL and JavaScript. The depen
 The usage of the application is fairly straightforward. Once the application is initialized, the user is presented with options and choices to make. The user has the ability to both view the data tables, as well as add/edit new entries as needed. 
   
 ### Screenshots
-![Beginning of application usage](link 1)
+![Beginning of application usage](./assets/images/appstart.png)
 
-![Showing the department and roles when chosen](link 2)
+![Showing the department and roles when chosen](./assets/images/rolesanddepartments.png)
 
 
 ## Built With
